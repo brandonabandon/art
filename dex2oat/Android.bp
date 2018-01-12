@@ -60,6 +60,19 @@ art_cc_binary {
         "libbase",
         "libsigchain",
     ],
+    arch: {
+        arm: {
+            instruction_set: "arm",
+        },
+    },
+    target: {
+        android: {
+            lto: {
+                full: true,
+            },
+
+        },
+    },
 }
 
 art_cc_binary {

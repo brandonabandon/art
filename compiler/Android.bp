@@ -262,6 +262,19 @@ art_cc_library {
             },
         },
     },
+    arch: {
+        arm: {
+            instruction_set: "arm",
+        },
+    },
+    target: {
+        android: {
+            lto: {
+                full: true,
+            },
+
+        },
+    },
     shared_libs: [
         "libart",
         "libart-dexlayout",
