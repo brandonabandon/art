@@ -35,10 +35,11 @@ art_global_defaults {
         "-Wshadow",
         "-Wunused",
         "-fvisibility=protected",
+	"-Wno-unused-private-field",
+	"-Wno-thread-safety-analysis",
+	"-Wno-null-pointer-arithmetic",
 
         // Warn about thread safety violations with clang.
-        "-Wthread-safety",
-        "-Wthread-safety-negative",
 
         // Warn if switch fallthroughs aren't annotated.
         "-Wimplicit-fallthrough",
