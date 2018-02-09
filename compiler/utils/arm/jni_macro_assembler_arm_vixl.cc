@@ -598,8 +598,14 @@ void ArmVIXLJNIMacroAssembler::ExceptionPoll(ManagedRegister m_scratch, size_t s
                       Thread::ExceptionOffset<kArmPointerSize>().Int32Value());
 
   ___ Cmp(scratch.AsVIXLRegister(), 0);
-  vixl32::Label* label = exception_blocks_.back()->Entry();
-  ___ BPreferNear(ne, label);
+  {
+    ExactAssemblyScope guard(asm_.GetVIXLAssembler(),
+                             vixl32::kMaxInstructionSizeInBytes,
+                             CodeBufferCheckScope::kMaximumSize);
+    vixl32::Label* label = exception_blocks_.back()->Entry();
+    ___ b(ne, Narrow, label);
+    ___ AddBranchLabel(label);
+  }
   // TODO: think about using CBNZ here.
 }
 
